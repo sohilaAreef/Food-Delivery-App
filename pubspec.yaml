@@ -61,6 +61,7 @@ flutter:
   assets:
     - assets/images/craft-burger-wooden-cutting-board-brown-paper-classic-retro-burgers-creative-ai-design-background-instagram-facebook-325613753.webp
     - assets/images/empty-cart-512.webp
+    - assets/images/sohila.png
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

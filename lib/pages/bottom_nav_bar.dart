@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:food_delivery/pages/account_page.dart';
 import 'package:food_delivery/pages/favorites_page.dart';
 import 'package:food_delivery/pages/home_page.dart';
 
@@ -20,7 +21,7 @@ class _BottomNavBarPageState extends State<BottomNavBarPage> {
   List<Widget> bodyOptions = [
     const HomePage(),
     const FavoritesPage(),
-    Container(child: Text('account'),),
+    const AccountPage(),
   ];
 
   int selectedIndex = 0;
@@ -49,7 +50,7 @@ class _BottomNavBarPageState extends State<BottomNavBarPage> {
           BottomNavigationBarItem(icon: Icon(Icons.person), label: 'account'),
         ],
         currentIndex: selectedIndex,
-        selectedItemColor: Colors.deepOrange,
+        selectedItemColor: Theme.of(context).primaryColor,
         onTap: onItemTapped,
         ),
     );

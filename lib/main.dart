@@ -14,6 +14,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Foodak - Food Delivery App',
       theme: ThemeData(
+        primarySwatch: Colors.indigo,
         
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,

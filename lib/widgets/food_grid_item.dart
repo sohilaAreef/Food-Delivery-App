@@ -47,7 +47,7 @@ class _FoodGridItemState extends State<FoodGridItem> {
                 }),
                 child: Icon(
                   food[widget.foodIndex].isFavorite ? Icons.favorite :Icons.favorite_border,
-                 color:Colors.deepOrange,))
+                 color: Theme.of(context).primaryColor,))
             )
              ],
 
@@ -67,10 +67,10 @@ class _FoodGridItemState extends State<FoodGridItem> {
             
             Text(
               '\$ ${food[widget.foodIndex].price}',
-              style: const TextStyle(
+              style: TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.bold,
-                color: Colors.deepOrange,
+                color: Theme.of(context).primaryColor,
               ),
             ),
           ],
