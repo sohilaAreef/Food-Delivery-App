@@ -12,18 +12,16 @@ class AccountPage extends StatelessWidget {
         Text(
           num.toString(),
           style:
-          TextStyle(
-            fontSize: 30,
-            fontWeight: FontWeight.bold,
-            color: Theme.of(context).primaryColor,
-          ),
+           Theme.of(context).textTheme.headlineMedium!.copyWith(
+             fontWeight: FontWeight.bold,
+             color: Theme.of(context).primaryColor,
+           )
         ),
 
           SizedBox(height: 8),
           Text(
             text,
-            style: TextStyle(
-              fontSize: 20,
+            style: Theme.of(context).textTheme.headlineSmall!.copyWith(
               color: Colors.grey,
             ),
           )
@@ -32,17 +30,15 @@ class AccountPage extends StatelessWidget {
   }
   Widget AccountAddtion(BuildContext context,{required IconData icon, required String title,String ?subtitle})
   {
+    final size = MediaQuery.of(context).size;
     return ListTile(
       leading: Icon( icon,
-      color: Theme.of(context).primaryColor,
-      size: 30,
+      size: size.height * .03,
       ),
       title: Text(title,
-      style: TextStyle(
-        fontSize: 20,
-        color: Colors.grey,
+      style: Theme.of(context).textTheme.titleMedium,
       ),
-      ),
+    
       onTap: (){},
       subtitle: subtitle != null ? Text(subtitle) : null,
       trailing: Icon(Icons.chevron_right, color: Theme.of(context).primaryColor),
@@ -67,8 +63,7 @@ class AccountPage extends StatelessWidget {
           SizedBox(height: 20),
           Text(
             'Sohila Arif',
-            style: TextStyle(
-              fontSize: 30,
+            style: Theme.of(context).textTheme.headlineLarge!.copyWith(
               fontWeight: FontWeight.bold,
             ),
           ),
@@ -80,24 +75,15 @@ class AccountPage extends StatelessWidget {
             ],
           ),
           Divider(
-            thickness: 2,
-            color: Colors.grey[300],
-            indent: 10,
-            endIndent: 10,
+            
           ),
           AccountAddtion(context,icon:  Icons.shopping_cart, title: 'Past Orders'),
           Divider(
-            thickness: 2,
-            color: Colors.grey[300],
-            indent: 10,
-            endIndent: 10,
+            
           ),
           AccountAddtion(context,icon: Icons.co_present, title: 'your vaouchers'),
           Divider(
-            thickness: 2,
-            color: Colors.grey[300],
-            indent: 10,
-            endIndent: 10,
+            
           ),
         ],
         

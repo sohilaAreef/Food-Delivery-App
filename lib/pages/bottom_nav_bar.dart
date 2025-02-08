@@ -28,13 +28,11 @@ class _BottomNavBarPageState extends State<BottomNavBarPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[100],
       appBar: AppBar(
-        backgroundColor: Colors.grey[100],
         centerTitle: true,
-        title: const Text(
+        title: Text(
           'Foodak',
-          style: TextStyle(color: Colors.black, fontSize: 30),
+          style: Theme.of(context).textTheme.headlineMedium,
           textAlign: TextAlign.center,
         ),
         iconTheme: const IconThemeData(color: Colors.black),

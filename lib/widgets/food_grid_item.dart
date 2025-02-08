@@ -17,6 +17,8 @@ class _FoodGridItemState extends State<FoodGridItem> {
   @override
   Widget build(BuildContext context) {
     
+  final size = MediaQuery.of(context).size;
+  
     return Container(
       decoration: BoxDecoration(
         color: Colors.white,
@@ -24,14 +26,17 @@ class _FoodGridItemState extends State<FoodGridItem> {
       ),
       child: Padding(
         padding: const EdgeInsets.all(16.0),
-        child: Column(
+        child: LayoutBuilder(
+          builder: (context, constrants) => 
+          Column(
           mainAxisSize: MainAxisSize.min, 
           children: [
             Stack(
+              alignment: Alignment.topCenter,
              children: [
                Image.network(
               food[widget.foodIndex].imagurl,
-              height: MediaQuery.of(context).size.height * 0.09,
+              height: constrants.maxHeight * 0.5,
               width: double.infinity,  
               fit: BoxFit.contain, 
             ),
@@ -53,28 +58,24 @@ class _FoodGridItemState extends State<FoodGridItem> {
 
             ),
             
-            SizedBox(height: 8.0),
+            SizedBox(height: constrants.maxHeight * 0.02),
             
             Text(
               food[widget.foodIndex].title,
-              style: const TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.w600,
+              style: Theme.of(context).textTheme.titleLarge!.copyWith(
+                fontWeight: FontWeight.bold,
               ),
-              textAlign: TextAlign.center, 
             ),
-            const SizedBox(height: 4.0),
+            SizedBox(height: constrants.maxHeight * 0.02),
             
             Text(
               '\$ ${food[widget.foodIndex].price}',
-              style: TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
+              style: Theme.of(context).textTheme.titleLarge!.copyWith(
                 color: Theme.of(context).primaryColor,
               ),
             ),
           ],
-        ),
+        ),)
       ),
     );
   }

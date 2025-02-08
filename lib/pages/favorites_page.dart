@@ -12,6 +12,7 @@ class _FavoritesPageState extends State<FavoritesPage> {
   @override
   Widget build(BuildContext context) {
     final favoriteFood = food.where((FoodItem) =>FoodItem.isFavorite == true).toList();
+    final size = MediaQuery.of(context).size;
     
     if(favoriteFood.isEmpty)
     {
@@ -19,14 +20,12 @@ class _FavoritesPageState extends State<FavoritesPage> {
         children: [
           Image.network(
             'https://cdn4.iconfinder.com/data/icons/shopping-460/200/empty-cart-512.png',
-            height: MediaQuery.of(context).size.height * 0.5,
+            height: size.height * 0.5,
           ),
-          const Text(
+          Text(
             'No favorite items added yet',
-            style: TextStyle(
-              fontSize: 22,
+            style: Theme.of(context).textTheme.headlineLarge!.copyWith(
               color: Colors.grey,
-              fontWeight: FontWeight.bold
             ),
           ),
         ],
@@ -40,26 +39,26 @@ class _FavoritesPageState extends State<FavoritesPage> {
         itemBuilder: (context, index) => Card(
             child: Padding(
               padding: const EdgeInsets.all(8.0),
-              child: Row(
+              child: LayoutBuilder(
+                builder: (context, constrants) =>Row(
                 children: [
-                  Image.network(food[index].imagurl, height: 70,),
+                  Image.network(food[index].imagurl, height: size.height * 0.1,),
                   Expanded(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                       Text(food[index].title, 
-                      style: const TextStyle(
-                        fontSize: 25,
-                        fontWeight: FontWeight.bold,)
+                      style: Theme.of(context).textTheme.headlineSmall!.copyWith(
+                        fontWeight: FontWeight.bold
+                      ),
                       ),
                       SizedBox(height: 4.0),
                       Text('\$ ${food[index].price}',
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
+                      style: Theme.of(context).textTheme.headlineSmall!.copyWith(
                         color: Theme.of(context).primaryColor,
+                        fontWeight : FontWeight.bold
                       ),
-                      ),
+                      )
                     ],
                     ),
                   ),
@@ -80,7 +79,7 @@ class _FavoritesPageState extends State<FavoritesPage> {
                     ),
                   ),
                 ],
-                ),
+                ),)
             ),
           )
       ),
