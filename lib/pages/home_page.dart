@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:food_delivery/models/food_item.dart';
 import 'package:food_delivery/widgets/food_grid_item.dart';
@@ -10,6 +9,7 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
+    final isLandScape = MediaQuery.of(context).orientation == Orientation.landscape;
     return Padding(
         padding: const EdgeInsets.all(8.0),
         child: SingleChildScrollView(
@@ -19,7 +19,7 @@ class HomePage extends StatelessWidget {
                 borderRadius: BorderRadius.circular(24.0),
                 child: Image.asset(
                   'assets/images/craft-burger-wooden-cutting-board-brown-paper-classic-retro-burgers-creative-ai-design-background-instagram-facebook-325613753.webp',
-                  height: size.height * 0.25,
+                  height: isLandScape? size.height * 0.5 : size.height * 0.25,
                   width: double.infinity,
                   fit: BoxFit.cover,
                 ),
@@ -30,7 +30,7 @@ class HomePage extends StatelessWidget {
                 physics: const NeverScrollableScrollPhysics(),
                 itemCount: food.length,
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
+                  crossAxisCount: isLandScape ? 3 : 2,
                   mainAxisSpacing: size.height * 0.02,
                   crossAxisSpacing: size.width * 0.02,
                 ),

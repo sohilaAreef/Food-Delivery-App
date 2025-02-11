@@ -9,8 +9,11 @@ void main() {
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
-  ]);
-  runApp(const MyApp());
+    DeviceOrientation.landscapeRight,
+    DeviceOrientation.landscapeLeft,
+  ]).then((_) {
+    runApp(const MyApp());
+  });
 }
 
 class MyApp extends StatelessWidget {
