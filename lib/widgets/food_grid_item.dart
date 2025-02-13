@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:food_delivery/models/food_item.dart';
+import 'package:food_delivery/widgets/favourite_button.dart';
 
-class FoodGridItem extends StatefulWidget {
+class FoodGridItem extends StatelessWidget {
   final int foodIndex;
   const FoodGridItem({
     super.key,
@@ -9,16 +10,9 @@ class FoodGridItem extends StatefulWidget {
   });
 
   @override
-  State<FoodGridItem> createState() => _FoodGridItemState();
-}
-
-class _FoodGridItemState extends State<FoodGridItem> {
-  bool fav =false;
-  @override
   Widget build(BuildContext context) {
-    
-  final size = MediaQuery.of(context).size;
-  
+    final size = MediaQuery.of(context).size;
+
     return Container(
       decoration: BoxDecoration(
         color: Colors.white,
@@ -27,55 +21,50 @@ class _FoodGridItemState extends State<FoodGridItem> {
       child: Padding(
         padding: const EdgeInsets.all(16.0),
         child: LayoutBuilder(
-          builder: (context, constrants) => 
-          Column(
-          mainAxisSize: MainAxisSize.min, 
-          children: [
-            Stack(
-              alignment: Alignment.topCenter,
-             children: [
-               Image.network(
-              food[widget.foodIndex].imagurl,
-              height: constrants.maxHeight * 0.5,
-              width: double.infinity,  
-              fit: BoxFit.contain, 
-            ),
-            Container(
-              alignment: Alignment.topRight,
-              child: InkWell(
-                onTap: () =>
-                setState(()
-                {
-                  food[widget.foodIndex] =
-                   food[widget.foodIndex].copyWith(isFavorite: !food[widget.foodIndex].isFavorite);
-                 
-                }),
-                child: Icon(
-                  food[widget.foodIndex].isFavorite ? Icons.favorite :Icons.favorite_border,
-                 color: Theme.of(context).primaryColor,))
-            )
-             ],
-
-            ),
-            
-            SizedBox(height: constrants.maxHeight * 0.02),
-            
-            Text(
-              food[widget.foodIndex].title,
-              style: Theme.of(context).textTheme.titleLarge!.copyWith(
-                fontWeight: FontWeight.bold,
+          builder: (context, constraints) => Column(
+            children: [
+              Stack(
+                alignment: Alignment.topCenter,
+                children: [
+                  Image.network(
+                    food[foodIndex].imagurl,
+                    height: constraints.maxHeight * 0.55,
+                  ),
+                  Align(
+                    alignment: Alignment.topRight,
+                    child: FavouritButton(
+                      foodIndex: foodIndex,
+                      height: constraints.maxHeight * 0.2,
+                      width: constraints.maxWidth * 0.2,
+                    ),
+                  ),
+                ],
               ),
-            ),
-            SizedBox(height: constrants.maxHeight * 0.02),
-            
-            Text(
-              '\$ ${food[widget.foodIndex].price}',
-              style: Theme.of(context).textTheme.titleLarge!.copyWith(
-                color: Theme.of(context).primaryColor,
+              SizedBox(height: constraints.maxHeight * 0.05),
+              SizedBox(
+                height: constraints.maxHeight * 0.2,
+                child: FittedBox(
+                  child: Text(
+                    food[foodIndex].title,
+                    style: Theme.of(context).textTheme.titleLarge,
+                  ),
+                ),
               ),
-            ),
-          ],
-        ),)
+              SizedBox(height: constraints.maxHeight * 0.01),
+              SizedBox(
+                height: constraints.maxHeight * 0.17,
+                child: FittedBox(
+                  child: Text(
+                    '\$ ${food[foodIndex].price}',
+                    style: Theme.of(context).textTheme.titleMedium!.copyWith(
+                          color: Theme.of(context).primaryColor,
+                        ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }
