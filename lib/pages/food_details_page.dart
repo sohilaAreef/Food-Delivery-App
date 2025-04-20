@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:food_delivery/models/food_item.dart';
-import 'package:food_delivery/widgets/custom_back_button.dart';
-import 'package:food_delivery/widgets/favourite_button.dart';
+import 'package:food_delivery/widgets/food_details/property_item.dart';
+import 'package:food_delivery/widgets/food_details/top_banner.dart';
+
 
 class FoodDetailsPage extends StatelessWidget {
   final FoodItem foodItem;
@@ -13,52 +14,92 @@ class FoodDetailsPage extends StatelessWidget {
 
     return Scaffold(
       // appBar: AppBar(),
-      body: Column(
-        children: [
-          DecoratedBox(
-            decoration: BoxDecoration(
-              color: Colors.grey.withOpacity(0.15),
+      body: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            TopBanner(foodItem: foodItem),
+            SizedBox(
+              height: 16.0,
             ),
-            child: Padding(
-              padding:
-                  const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
-              child: SafeArea(
-                child: SizedBox(
-                  height: size.height * 0.4,
-                  width: size.width,
-                  child: Column(
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          CustomBackButton(
-                            width: size.width * 0.09,
-                            height: size.height * 0.04,
-                          ),
-                          FavouritButton(
-                            foodIndex: 1,
-                            width: size.width * 0.09,
-                            height: size.height * 0.04,
-                          ),
-                        ],
-                      ),
-                      const Spacer(),
-                      Align(
-                        alignment: Alignment.center,
-                        child: Image.network(
-                          foodItem.imagurl,
-                          fit: BoxFit.contain,
-                          height: size.height * 0.3,
-                          width: size.width,
-                        ),
-                      ),
-                    ],
+            Padding(
+              padding: const EdgeInsets.only(left: 16.0, right: 16.0, top: 16.0, bottom: 40.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(foodItem.title,
+                      style: Theme.of(context)
+                          .textTheme
+                          .headlineSmall!
+                          .copyWith(fontWeight: FontWeight.w600)),
+                  SizedBox(
+                    height: 6.0,
                   ),
-                ),
+                  Text(
+                    'Bufflo Burger',
+                    style: Theme.of(context)
+                        .textTheme
+                        .bodyLarge!
+                        .copyWith(color: Colors.grey),
+                  ),
+                  SizedBox(height: 32.0,),
+                  IntrinsicHeight(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        PropertyItem(PropertyName: "Size", PropertySize: "Medium"),
+                        VerticalDivider(
+                          endIndent: 0,
+                          indent: 0,
+                        ),
+                        PropertyItem(PropertyName: "Cooking", PropertySize: "10-20 Min"),
+                        VerticalDivider(
+                          endIndent: 0,
+                          indent: 0,
+                        ),
+                        PropertyItem(PropertyName: "Delivery", PropertySize: "30-40 Min"),
+                      ],
+                    ),
+                  ),
+                  SizedBox(height: 16.0,),
+                  Text(
+                    'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque ut ligula nec enim facilisis efficitur. Donec ac nunc a nisi facilisis bibendum. Sed euismod, nunc vel tincidunt fringilla, nunc nisl aliquet nunc, eget aliquam nunc nisl eget nunc. Sed euismod, nunc vel tincidunt fringilla, nunc nisl aliquet nunc, eget aliquam nunc nisl eget nunc. Sed euismod, nunc vel tincidunt fringilla, nunc nisl aliquet nunc, eget aliquam nunc nisl eget nunc.',
+                    style: Theme.of(context)
+                        .textTheme
+                        .bodyMedium!
+                        .copyWith(fontWeight: FontWeight.w600,
+                            color: Colors.grey),
+                  ),
+                  SizedBox(height: 32.0,),
+                  Row(
+                    children: [
+                      Text(
+                        '\$ ${foodItem.price}',
+                        style: Theme.of(context)
+                            .textTheme
+                            .headlineSmall!
+                            .copyWith(fontWeight: FontWeight.w600,
+                                color: Theme.of(context).primaryColor),
+                      ),
+                      SizedBox( width: 32.0,),
+                      Expanded(
+                        child: SizedBox(
+                          height: size.height * 0.05,
+                          child: ElevatedButton(onPressed: (){},
+                           child: Text('checkout',
+                           style: Theme.of(context).textTheme.titleLarge!.copyWith(
+                             color: Colors.white
+                           ),),
+                           style: ElevatedButton.styleFrom(backgroundColor: Theme.of(context).primaryColor),),
+                        ),
+                      )
+                    ],
+                  )
+                ],
               ),
-            ),
-          ),
-        ],
+            )
+          ],
+        ),
       ),
     );
   }
